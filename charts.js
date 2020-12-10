@@ -380,7 +380,7 @@ function displayWeekCures() {
         return e.kumulativni_pocet_vylecenych;
       });
 
-      console.log(date);
-      console.log(cures);
+      // console.log(date);
+      // console.log(cures);
     });
 }

@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 body {
   margin: 0px;
   padding: 0px;
   background: white;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body.dark-theme {
@@ -64,16 +64,13 @@ footer a {
   text-decoration: underline;
 }
 
-footer span {
-  text-transform: uppercase;
-}
-
 .select {
   display: flex;
   justify-content: center;
 }
 
 label {
+  font-size: 15pt;
   display: flex;
   justify-content: center;
   padding: 5px;
@@ -104,4 +101,156 @@ select {
   transform: translate(-50%, -50%);
   font-family: "Source Sans Pro", sans-serif;
   font-size: 50px;
+}
+
+@media (max-width: 1230px) {
+  .data {
+    width: 200px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .data {
+    width: 150px;
+    font-size: 17pt;
+  }
+
+  .title {
+    font-size: 20pt;
+  }
+
+  h1 {
+    font-size: 30pt;
+  }
+}
+
+@media (max-width: 991px) {
+  .data {
+    width: 150px;
+    text-align: center;
+  }
+
+  .charts {
+    width: 650px;
+    height: 450px;
+  }
+}
+
+@media (max-width: 875px) {
+  .data {
+    width: 125px;
+    text-align: center;
+  }
+
+  .charts {
+    width: 550px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 805px) {
+  .data {
+    width: 125px;
+    text-align: center;
+  }
+
+  .charts {
+    width: 550px;
+    height: 350px;
+  }
+
+  .dataWrapper {
+    margin: 0px auto;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 645px) {
+  .data {
+    width: 150px;
+    text-align: center;
+  }
+
+  .charts {
+    width: 550px;
+    height: 350px;
+  }
+
+  .dataWrapper {
+    margin: 0px auto;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 625px) {
+  .data {
+    width: 150px;
+    text-align: center;
+  }
+
+  .charts {
+    width: 450px;
+    height: 300px;
+  }
+
+  .dataWrapper {
+    margin: 0px auto;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 530px) {
+  .data {
+    width: 150px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 15pt;
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+
+  .charts {
+    width: 350px;
+    height: 300px;
+  }
+
+  .dataWrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 450px) {
+  .data {
+    width: 150px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 15pt;
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+
+  .charts {
+    width: 300px;
+    height: 250px;
+  }
+
+  .dataWrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
