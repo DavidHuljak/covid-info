@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts-en.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <title>CovidInfo</title>
+  </head>
+  <body>
+    <div id="load-animation">
+      <span class="text">Získávám data</span></span>
+    </div>
+    <h1>COVID-19 Česká republika</h1>
+    <div class="dataWrapper">
+      <div class="title">
+        Provedené testy:
+        <div class="data" id="tests"></div>
+        <div class="data" id="newTests"></div>
+      </div>
+      <div class="title">
+        Potvrzené případy:
+        <div class="data" id="cases"></div>
+        <div class="data" id="newCases"></div>
+      </div>
+      <div class="title">
+        Vyléčení:
+        <div class="data" id="cures"></div>
+        <div class="data" id="newCures"></div>
+      </div>
+      <div class="title">
+        Úmrtí:
+        <div class="data" id="deaths"></div>
+        <div class="data" id="newDeaths"></div>
+      </div>
+    </div>
+    <label for="select">Období: </label>
+    <div class="select">
+      <select name="select" id="select" onchange="updatePeriod();">
+        <option value="week">Týden</option>
+        <option value="month">Měsíc</option>
+        <option value="all">Celé období</option>
+      </select>
+    </div>
+    <div class="charts" id="testsChart"></div>
+    <div class="charts" id="casesChart"></div>
+    <!-- <div class="charts" id="deathsChart"></div>
+    <div class="charts" id="curesChart"></div> -->
+
+    <script src="./basic-data.js"></script>
+    <script src="./charts.js"></script>
+
+    
+    <footer>
+      Zdroj dat:
+      <a href="https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19"
+        >Ministerstvo Zdravotnictví ČR</a
+      >
+      <div>
+        Data aktualizována: <span id="update"></span></div>
+      </div>
+        <span>&copy Dávid Huljak <script>document.write(new Date().getFullYear())</script></span>
+      
+        
+      
+    </footer>
+  </body>
+</html>
