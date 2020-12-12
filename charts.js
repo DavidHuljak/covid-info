@@ -14,24 +14,70 @@ var getDaysInMonth = function (month, year) {
   return new Date(year, month, 0).getDate();
 };
 
+function createChart(id, title, name, type, xData, yData, color) {
+  var chart = document.getElementById(id);
+  var myChart = echarts.init(chart);
+  var option = {
+    tooltip: {
+      trigger: "axis",
+    },
+    title: {
+      left: "center",
+      text: title,
+    },
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      data: xData,
+    },
+    yAxis: {
+      type: "value",
+      boundaryGap: [0, "100%"],
+    },
+
+    series: [
+      {
+        name: name,
+        type: type,
+        smooth: true,
+        symbol: "none",
+        sampling: "average",
+        data: yData,
+        itemStyle: {
+          color: color,
+        },
+        areaStyle: {
+          color: color,
+        },
+      },
+    ],
+  };
+  myChart.setOption(option);
+}
+
 var month = getDaysInMonth(new Date().getMonth(), new Date().getFullYear());
+monthPlus = month;
 month = -month;
 
 displayWeekTests();
 displayWeekCases();
 displayWeekCures();
+displayWeekRNumber();
 
 function updatePeriod() {
   var select = document.getElementById("select");
   if (select.options[select.selectedIndex].value == "week") {
     displayWeekTests();
     displayWeekCases();
+    displayWeekRNumber();
   } else if (select.options[select.selectedIndex].value == "month") {
     displayMonthTests();
     displayMonthCases();
+    displayMonthRNumber();
   } else {
     displayAllTests();
     displayAllCases();
+    displayAllRNumber();
   }
 }
 //tests charts
@@ -48,44 +94,15 @@ function displayWeekTests() {
         return e.prirustkovy_pocet_testu;
       });
 
-      var chart = document.getElementById("testsChart");
-      var myChart = echarts.init(chart);
-      var option = {
-        tooltip: {
-          trigger: "axis",
-        },
-        title: {
-          left: "center",
-          text: "Provedené testy",
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-        },
-        yAxis: {
-          type: "value",
-          boundaryGap: [0, "100%"],
-        },
-
-        series: [
-          {
-            name: "Provedené testy",
-            type: "line",
-            smooth: true,
-            symbol: "none",
-            sampling: "average",
-            data: tests,
-            itemStyle: {
-              color: "darkred",
-            },
-            areaStyle: {
-              color: "darkred",
-            },
-          },
-        ],
-      };
-      myChart.setOption(option);
+      createChart(
+        "testsChart",
+        "Provedené testy",
+        "Provedené testy",
+        "line",
+        date,
+        tests,
+        "darkred"
+      );
     });
 }
 
@@ -101,44 +118,15 @@ function displayMonthTests() {
         return e.prirustkovy_pocet_testu;
       });
 
-      var chart = document.getElementById("testsChart");
-      var myChart = echarts.init(chart);
-      var option = {
-        tooltip: {
-          trigger: "axis",
-        },
-        title: {
-          left: "center",
-          text: "Provedené testy",
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-        },
-        yAxis: {
-          type: "value",
-          boundaryGap: [0, "100%"],
-        },
-
-        series: [
-          {
-            name: "Provedené testy",
-            type: "line",
-            smooth: true,
-            symbol: "none",
-            sampling: "average",
-            data: tests,
-            itemStyle: {
-              color: "darkred",
-            },
-            areaStyle: {
-              color: "darkred",
-            },
-          },
-        ],
-      };
-      myChart.setOption(option);
+      createChart(
+        "testsChart",
+        "Provedené testy",
+        "Provedené testy",
+        "line",
+        date,
+        tests,
+        "darkred"
+      );
     });
 }
 
@@ -154,44 +142,15 @@ function displayAllTests() {
         return e.prirustkovy_pocet_testu;
       });
 
-      var chart = document.getElementById("testsChart");
-      var myChart = echarts.init(chart);
-      var option = {
-        tooltip: {
-          trigger: "axis",
-        },
-        title: {
-          left: "center",
-          text: "Provedené testy",
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-        },
-        yAxis: {
-          type: "value",
-          boundaryGap: [0, "100%"],
-        },
-
-        series: [
-          {
-            name: "Provedené testy",
-            type: "line",
-            smooth: true,
-            symbol: "none",
-            sampling: "average",
-            data: tests,
-            itemStyle: {
-              color: "darkred",
-            },
-            areaStyle: {
-              color: "darkred",
-            },
-          },
-        ],
-      };
-      myChart.setOption(option);
+      createChart(
+        "testsChart",
+        "Provedené testy",
+        "Provedené testy",
+        "line",
+        date,
+        tests,
+        "darkred"
+      );
     });
 }
 
@@ -211,44 +170,15 @@ function displayWeekCases() {
         return e.prirustkovy_pocet_nakazenych;
       });
 
-      var chart = document.getElementById("casesChart");
-      var myChart = echarts.init(chart);
-      var option = {
-        tooltip: {
-          trigger: "axis",
-        },
-        title: {
-          left: "center",
-          text: "Potvrzené případy",
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-        },
-        yAxis: {
-          type: "value",
-          boundaryGap: [0, "100%"],
-        },
-
-        series: [
-          {
-            name: "Potvrzené případy",
-            type: "line",
-            smooth: true,
-            symbol: "none",
-            sampling: "average",
-            data: cases,
-            itemStyle: {
-              color: "darkred",
-            },
-            areaStyle: {
-              color: "darkred",
-            },
-          },
-        ],
-      };
-      myChart.setOption(option);
+      createChart(
+        "casesChart",
+        "Potvrzené případy",
+        "Potvrzené případy",
+        "line",
+        date,
+        cases,
+        "darkred"
+      );
     });
 }
 
@@ -266,44 +196,15 @@ function displayMonthCases() {
         return e.prirustkovy_pocet_nakazenych;
       });
 
-      var chart = document.getElementById("casesChart");
-      var myChart = echarts.init(chart);
-      var option = {
-        tooltip: {
-          trigger: "axis",
-        },
-        title: {
-          left: "center",
-          text: "Potvrzené případy",
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-        },
-        yAxis: {
-          type: "value",
-          boundaryGap: [0, "100%"],
-        },
-
-        series: [
-          {
-            name: "Potvrzené případy",
-            type: "line",
-            smooth: true,
-            symbol: "none",
-            sampling: "average",
-            data: cases,
-            itemStyle: {
-              color: "darkred",
-            },
-            areaStyle: {
-              color: "darkred",
-            },
-          },
-        ],
-      };
-      myChart.setOption(option);
+      createChart(
+        "casesChart",
+        "Potvrzené případy",
+        "Potvrzené případy",
+        "line",
+        date,
+        cases,
+        "darkred"
+      );
     });
 }
 
@@ -321,44 +222,15 @@ function displayAllCases() {
         return e.prirustkovy_pocet_nakazenych;
       });
 
-      var chart = document.getElementById("casesChart");
-      var myChart = echarts.init(chart);
-      var option = {
-        tooltip: {
-          trigger: "axis",
-        },
-        title: {
-          left: "center",
-          text: "Potvrzené případy",
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-        },
-        yAxis: {
-          type: "value",
-          boundaryGap: [0, "100%"],
-        },
-
-        series: [
-          {
-            name: "Potvrzené případy",
-            type: "line",
-            smooth: true,
-            symbol: "none",
-            sampling: "average",
-            data: cases,
-            itemStyle: {
-              color: "darkred",
-            },
-            areaStyle: {
-              color: "darkred",
-            },
-          },
-        ],
-      };
-      myChart.setOption(option);
+      createChart(
+        "casesChart",
+        "Potvrzené případy",
+        "Potvrzené případy",
+        "line",
+        date,
+        cases,
+        "darkred"
+      );
     });
 }
 
@@ -380,7 +252,109 @@ function displayWeekCures() {
         return e.kumulativni_pocet_vylecenych;
       });
 
+      var cures1 = data.data.slice(-7).map(function (e) {
+        return e.kumulativni_pocet_vylecenych;
+      });
+
       // console.log(date);
       // console.log(cures);
+      //console.log(cures - cures1);
+    });
+}
+
+function displayWeekRNumber() {
+  fetch(
+    `https://api.apify.com/v2/key-value-stores/DO0Mg4d1cPbWhtPSD/records/LATEST?disableRedirect=true`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var date = data.data
+        .slice(0, 7)
+        .reverse()
+        .map(function (e) {
+          return formatDate(e[0]);
+        });
+
+      var rNumber = data.data
+        .slice(0, 7)
+        .reverse()
+        .map(function (e) {
+          return e[2];
+        });
+
+      createChart(
+        "rChart",
+        "Reprodukční číslo",
+        "Reprodukční číslo",
+        "line",
+        date,
+        rNumber,
+        "darkred"
+      );
+    });
+}
+
+function displayMonthRNumber() {
+  fetch(
+    `https://api.apify.com/v2/key-value-stores/DO0Mg4d1cPbWhtPSD/records/LATEST?disableRedirect=true`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(monthPlus);
+      var date = data.data
+        .slice(0, monthPlus)
+        .reverse()
+        .map(function (e) {
+          return formatDate(e[0]);
+        });
+
+      var rNumber = data.data
+        .slice(0, monthPlus)
+        .reverse()
+        .map(function (e) {
+          return e[2];
+        });
+
+      createChart(
+        "rChart",
+        "Reprodukční číslo",
+        "Reprodukční číslo",
+        "line",
+        date,
+        rNumber,
+        "darkred"
+      );
+    });
+}
+
+function displayAllRNumber() {
+  fetch(
+    `https://api.apify.com/v2/key-value-stores/DO0Mg4d1cPbWhtPSD/records/LATEST?disableRedirect=true`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var date = data.data.reverse().map(function (e) {
+        return formatDate(e[0]);
+      });
+
+      var rNumber = data.data.map(function (e) {
+        return e[2];
+      });
+
+      createChart(
+        "rChart",
+        "Reprodukční číslo",
+        "Reprodukční číslo",
+        "line",
+        date,
+        rNumber,
+        "darkred"
+      );
     });
 }

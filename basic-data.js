@@ -86,5 +86,19 @@ function getCalculatdeData() {
     });
 }
 
+function getRNumber() {
+  fetch(
+    `https://api.apify.com/v2/key-value-stores/DO0Mg4d1cPbWhtPSD/records/LATEST?disableRedirect=true`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      document.getElementById("rNumber").innerHTML =
+        "Reprodukční číslo: <strong>" + data.data[0][2];
+    });
+}
+
 getBasicData();
 getCalculatdeData();
+getRNumber();

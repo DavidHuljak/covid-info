@@ -14,9 +14,10 @@
   </head>
   <body>
     <div id="load-animation">
-      <span class="text">Získávám data</span></span>
+      <span class="text">Získávám data</span>
     </div>
     <h1>COVID-19 Česká republika</h1>
+    <div id="rNumber"></div>
     <div class="dataWrapper">
       <div class="title">
         Provedené testy:
@@ -49,25 +50,26 @@
     </div>
     <div class="charts" id="testsChart"></div>
     <div class="charts" id="casesChart"></div>
+    <div class="charts" id="rChart"></div>
     <!-- <div class="charts" id="deathsChart"></div>
     <div class="charts" id="curesChart"></div> -->
 
     <script src="./basic-data.js"></script>
     <script src="./charts.js"></script>
 
-    
     <footer>
       Zdroj dat:
       <a href="https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19"
         >Ministerstvo Zdravotnictví ČR</a
       >
-      <div>
-        Data aktualizována: <span id="update"></span></div>
-      </div>
-        <span>&copy Dávid Huljak <script>document.write(new Date().getFullYear())</script></span>
-      
-        
-      
+      <div>Data aktualizována: <span id="update"></span></div>
+
+      <span
+        >&copy Dávid Huljak
+        <script>
+          document.write(new Date().getFullYear());
+        </script></span
+      >
     </footer>
   </body>
 </html>
