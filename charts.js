@@ -14,6 +14,10 @@ var getDaysInMonth = function (month, year) {
   return new Date(year, month, 0).getDate();
 };
 
+var month = getDaysInMonth(new Date().getMonth(), new Date().getFullYear());
+monthPlus = month;
+month = -month;
+
 function createChart(id, title, name, type, xData, yData, color) {
   var chart = document.getElementById(id);
   var myChart = echarts.init(chart);
@@ -55,13 +59,10 @@ function createChart(id, title, name, type, xData, yData, color) {
   myChart.setOption(option);
 }
 
-var month = getDaysInMonth(new Date().getMonth(), new Date().getFullYear());
-monthPlus = month;
-month = -month;
-
 displayWeekTests();
 displayWeekCases();
 displayWeekCures();
+displayWeekDeaths();
 displayWeekRNumber();
 
 function updatePeriod() {
@@ -69,14 +70,20 @@ function updatePeriod() {
   if (select.options[select.selectedIndex].value == "week") {
     displayWeekTests();
     displayWeekCases();
+    displayWeekCures();
+    displayWeekDeaths();
     displayWeekRNumber();
   } else if (select.options[select.selectedIndex].value == "month") {
     displayMonthTests();
     displayMonthCases();
+    displayMonthCures();
+    displayMonthDeaths();
     displayMonthRNumber();
   } else {
     displayAllTests();
     displayAllCases();
+    displayAllCures();
+    displayAllDeaths();
     displayAllRNumber();
   }
 }
@@ -252,15 +259,189 @@ function displayWeekCures() {
         return e.kumulativni_pocet_vylecenych;
       });
 
-      var cures1 = data.data.slice(-7).map(function (e) {
+      var result = data.data.slice(-7).map(function (e, index) {
+        return e.kumulativni_pocet_vylecenych - cures[index];
+      });
+
+      createChart(
+        "curesChart",
+        "Vyléčení",
+        "Vyléčení",
+        "line",
+        date,
+        result,
+        "darkred"
+      );
+    });
+}
+
+function displayMonthCures() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/nakazeni-vyleceni-umrti-testy.json`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var date = data.data.slice(month).map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var cures = data.data.slice(month - 1).map(function (e) {
         return e.kumulativni_pocet_vylecenych;
       });
 
-      // console.log(date);
-      // console.log(cures);
-      //console.log(cures - cures1);
+      var result = data.data.slice(month).map(function (e, index) {
+        return e.kumulativni_pocet_vylecenych - cures[index];
+      });
+
+      createChart(
+        "curesChart",
+        "Vyléčení",
+        "Vyléčení",
+        "line",
+        date,
+        result,
+        "darkred"
+      );
     });
 }
+
+function displayAllCures() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/nakazeni-vyleceni-umrti-testy.json`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var date = data.data.map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var cures = data.data.slice(-data.data.length).map(function (e) {
+        return e.kumulativni_pocet_vylecenych;
+      });
+
+      var result = data.data
+        .slice(-data.data.length + 1)
+        .map(function (e, index) {
+          return e.kumulativni_pocet_vylecenych - cures[index];
+        });
+
+      createChart(
+        "curesChart",
+        "Vyléčení",
+        "Vyléčení",
+        "line",
+        date,
+        result,
+        "darkred"
+      );
+    });
+}
+
+//deaths charts
+
+function displayWeekDeaths() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/nakazeni-vyleceni-umrti-testy.json`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var date = data.data.slice(-7).map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var deaths = data.data.slice(-8).map(function (e) {
+        return e.kumulativni_pocet_umrti;
+      });
+
+      var result = data.data.slice(-7).map(function (e, index) {
+        return e.kumulativni_pocet_umrti - deaths[index];
+      });
+
+      createChart(
+        "deathsChart",
+        "Umrtí",
+        "Umrtí",
+        "line",
+        date,
+        result,
+        "darkred"
+      );
+    });
+}
+
+function displayMonthDeaths() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/nakazeni-vyleceni-umrti-testy.json`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var date = data.data.slice(month).map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var deaths = data.data.slice(month - 1).map(function (e) {
+        return e.kumulativni_pocet_umrti;
+      });
+
+      var result = data.data.slice(month).map(function (e, index) {
+        return e.kumulativni_pocet_umrti - deaths[index];
+      });
+
+      createChart(
+        "deathsChart",
+        "Umrtí",
+        "Umrtí",
+        "line",
+        date,
+        result,
+        "darkred"
+      );
+    });
+}
+
+function displayAllDeaths() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/nakazeni-vyleceni-umrti-testy.json`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      var date = data.data.map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var deaths = data.data.slice(-data.data.length).map(function (e) {
+        return e.kumulativni_pocet_umrti;
+      });
+
+      var result = data.data
+        .slice(-data.data.length + 1)
+        .map(function (e, index) {
+          return e.kumulativni_pocet_umrti - deaths[index];
+        });
+
+      createChart(
+        "deathsChart",
+        "Umrtí",
+        "Umrtí",
+        "line",
+        date,
+        result,
+        "darkred"
+      );
+    });
+}
+
+//r number charts
 
 function displayWeekRNumber() {
   fetch(
@@ -304,7 +485,6 @@ function displayMonthRNumber() {
       return response.json();
     })
     .then((data) => {
-      console.log(monthPlus);
       var date = data.data
         .slice(0, monthPlus)
         .reverse()

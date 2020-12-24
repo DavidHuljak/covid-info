@@ -64,6 +64,14 @@ footer a {
   text-decoration: underline;
 }
 
+footer .downLinks {
+  text-align: right;
+  background-color: darkred;
+  padding: 10px;
+  color: white;
+  word-spacing: 10px;
+}
+
 .select {
   display: flex;
   justify-content: center;

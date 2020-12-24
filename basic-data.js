@@ -70,14 +70,14 @@ function getCalculatdeData() {
     })
     .then((data) => {
       var date = formatDate(data.data.slice(-1)[0].datum);
-      var uzdraveni1 = data.data.slice(-1)[0].kumulativni_pocet_vylecenych;
-      var uzdraveni2 = data.data.slice(-2)[0].kumulativni_pocet_vylecenych;
 
-      var umrti1 = data.data.slice(-1)[0].kumulativni_pocet_umrti;
-      var umrti2 = data.data.slice(-2)[0].kumulativni_pocet_umrti;
+      var uzdraveni =
+        data.data.slice(-1)[0].kumulativni_pocet_vylecenych -
+        data.data.slice(-2)[0].kumulativni_pocet_vylecenych;
 
-      var uzdraveni = uzdraveni1 - uzdraveni2;
-      var umrti = umrti1 - umrti2;
+      var umrti =
+        data.data.slice(-1)[0].kumulativni_pocet_umrti -
+        data.data.slice(-2)[0].kumulativni_pocet_umrti;
 
       document.getElementById("newCures").innerHTML =
         "+ " + formatNumber(uzdraveni) + " za " + date;
