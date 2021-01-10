@@ -59,37 +59,45 @@ function createChart(id, title, name, type, xData, yData, color) {
   myChart.setOption(option);
 }
 
-displayWeekTests();
+displayWeekPCRTests();
+displayWeekATests();
 displayWeekCases();
 displayWeekCures();
 displayWeekDeaths();
 displayWeekRNumber();
+console.log(prefix + "Displaying week data.");
 
 function updatePeriod() {
   var select = document.getElementById("select");
   if (select.options[select.selectedIndex].value == "week") {
-    displayWeekTests();
+    displayWeekPCRTests();
+    displayWeekATests();
     displayWeekCases();
     displayWeekCures();
     displayWeekDeaths();
     displayWeekRNumber();
+    console.log(prefix + "Displaying week data.");
   } else if (select.options[select.selectedIndex].value == "month") {
-    displayMonthTests();
+    displayMonthPCRTests();
+    displayMonthATests();
     displayMonthCases();
     displayMonthCures();
     displayMonthDeaths();
     displayMonthRNumber();
+    console.log(prefix + "Displaying month data.");
   } else {
-    displayAllTests();
+    displayAllPCRTests();
+    displayAllATests();
     displayAllCases();
     displayAllCures();
     displayAllDeaths();
     displayAllRNumber();
+    console.log(prefix + "Displaying all data.");
   }
 }
 //tests charts
 
-function displayWeekTests() {
+function displayWeekPCRTests() {
   fetch(`https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy.json`)
     .then((response) => response.json())
     .then((data) => {
@@ -103,8 +111,8 @@ function displayWeekTests() {
 
       createChart(
         "testsChart",
-        "Provedené testy",
-        "Provedené testy",
+        "Provedené PCR testy",
+        "Provedené PCR testy",
         "line",
         date,
         tests,
@@ -113,7 +121,7 @@ function displayWeekTests() {
     });
 }
 
-function displayMonthTests() {
+function displayMonthPCRTests() {
   fetch(`https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy.json`)
     .then((response) => response.json())
     .then((data) => {
@@ -127,8 +135,8 @@ function displayMonthTests() {
 
       createChart(
         "testsChart",
-        "Provedené testy",
-        "Provedené testy",
+        "Provedené PCR testy",
+        "Provedené PCR testy",
         "line",
         date,
         tests,
@@ -137,7 +145,7 @@ function displayMonthTests() {
     });
 }
 
-function displayAllTests() {
+function displayAllPCRTests() {
   fetch(`https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy.json`)
     .then((response) => response.json())
     .then((data) => {
@@ -151,8 +159,88 @@ function displayAllTests() {
 
       createChart(
         "testsChart",
-        "Provedené testy",
-        "Provedené testy",
+        "Provedené PCR testy",
+        "Provedené PCR testy",
+        "line",
+        date,
+        tests,
+        "darkred"
+      );
+    });
+}
+
+//antigen tests charts
+
+function displayWeekATests() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy-pcr-antigenni.json`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      var date = data.data.slice(-7).map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var tests = data.data.slice(-7).map(function (e) {
+        return e.pocet_AG_testy;
+      });
+
+      createChart(
+        "ATestsChart",
+        "Provedené antigenní testy",
+        "Provedené antigenní testy",
+        "line",
+        date,
+        tests,
+        "darkred"
+      );
+    });
+}
+
+function displayMonthATests() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy-pcr-antigenni.json`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      var date = data.data.slice(month).map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var tests = data.data.slice(month).map(function (e) {
+        return e.pocet_AG_testy;
+      });
+
+      createChart(
+        "ATestsChart",
+        "Provedené antigenní testy",
+        "Provedené antigenní testy",
+        "line",
+        date,
+        tests,
+        "darkred"
+      );
+    });
+}
+
+function displayAllATests() {
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy-pcr-antigenni.json`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      var date = data.data.map(function (e) {
+        return formatDate(e.datum);
+      });
+
+      var tests = data.data.map(function (e) {
+        return e.pocet_AG_testy;
+      });
+
+      createChart(
+        "ATestsChart",
+        "Provedené antigenní testy",
+        "Provedené antigenní testy",
         "line",
         date,
         tests,

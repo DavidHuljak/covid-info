@@ -33,14 +33,22 @@ function getBasicData() {
       return response.json();
     })
     .then((data) => {
-      document.getElementById("tests").innerHTML = formatNumber(
+      document.getElementById("PCRTests").innerHTML = formatNumber(
         data.data[0].provedene_testy_celkem
       );
-      document.getElementById("newTests").innerHTML =
+      document.getElementById("newPCRTests").innerHTML =
         "+ " +
         formatNumber(data.data[0].provedene_testy_vcerejsi_den) +
         " za " +
         formatDate(data.data[0].provedene_testy_vcerejsi_den_datum);
+      document.getElementById("ATests").innerHTML = formatNumber(
+        data.data[0].provedene_antigenni_testy_celkem
+      );
+      document.getElementById("newATests").innerHTML =
+        "+ " +
+        formatNumber(data.data[0].provedene_antigenni_testy_vcerejsi_den) +
+        " za " +
+        formatDate(data.data[0].provedene_antigenni_testy_vcerejsi_den_datum);
       document.getElementById("cases").innerHTML = formatNumber(
         data.data[0].potvrzene_pripady_celkem
       );
@@ -58,6 +66,7 @@ function getBasicData() {
       document.getElementById("update").innerHTML = formatDate(
         data.data[0].datum
       );
+      console.log(prefix + "Displaying basic data.");
     });
 }
 
