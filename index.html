@@ -36,6 +36,11 @@
         <div class="data" id="newCases"></div>
       </div>
       <div class="title">
+        Vykázaná očkování:
+        <div class="data" id="vaccination"></div>
+        <div class="data" id="newVaccination"></div>
+      </div>
+      <div class="title">
         Vyléčení:
         <div class="data" id="cures"></div>
         <div class="data" id="newCures"></div>
@@ -45,10 +50,15 @@
         <div class="data" id="deaths"></div>
         <div class="data" id="newDeaths"></div>
       </div>
+      <div class="title">
+        Hospitalizovaní:
+        <div class="data" id="hospital"></div>
+        <div class="data" id="newHospital"></div>
+      </div>
     </div>
     <label for="select">Období: </label>
     <div class="select">
-      <select name="select" id="select" onchange="updatePeriod();">
+      <select name="select" id="select">
         <option value="week">Týden</option>
         <option value="month">Měsíc</option>
         <option value="all">Celé období</option>
@@ -57,8 +67,8 @@
     <div class="charts" id="testsChart"></div>
     <div class="charts" id="ATestsChart"></div>
     <div class="charts" id="casesChart"></div>
-    <div class="charts" id="deathsChart"></div>
     <div class="charts" id="curesChart"></div>
+    <div class="charts" id="deathsChart"></div>
     <div class="charts" id="rChart"></div>
 
     <script src="./basic-data.js"></script>

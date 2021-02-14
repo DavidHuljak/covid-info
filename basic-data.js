@@ -1,7 +1,3 @@
-const prefix = "[CovidCR] ";
-
-console.log(prefix + "Loaded!");
-
 $(window).on("load", function () {
   var $preloader = $("#load-animation"),
     $spinner = $preloader.find(".text");
@@ -24,6 +20,12 @@ function formatDate(num) {
   var year = "" + a.getFullYear();
   return day + "." + month + ". " + year;
 }
+
+var month = new Date(
+  new Date().getFullYear(),
+  new Date().getMonth(),
+  0
+).getDate();
 
 function getBasicData() {
   fetch(
@@ -57,20 +59,30 @@ function getBasicData() {
         formatNumber(data.data[0].potvrzene_pripady_vcerejsi_den) +
         " za " +
         formatDate(data.data[0].potvrzene_pripady_vcerejsi_den_datum);
+      document.getElementById("vaccination").innerHTML = formatNumber(
+        data.data[0].vykazana_ockovani_celkem
+      );
+      document.getElementById("newVaccination").innerHTML =
+        "+ " +
+        formatNumber(data.data[0].vykazana_ockovani_vcerejsi_den) +
+        " za " +
+        formatDate(data.data[0].vykazana_ockovani_vcerejsi_den_datum);
       document.getElementById("cures").innerHTML = formatNumber(
         data.data[0].vyleceni
       );
       document.getElementById("deaths").innerHTML = formatNumber(
         data.data[0].umrti
       );
+      document.getElementById("hospital").innerHTML = formatNumber(
+        data.data[0].aktualne_hospitalizovani
+      );
       document.getElementById("update").innerHTML = formatDate(
         data.data[0].datum
       );
-      console.log(prefix + "Displaying basic data.");
     });
 }
 
-function getCalculatdeData() {
+function calculateData() {
   fetch(
     `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/nakazeni-vyleceni-umrti-testy.json`
   )
@@ -93,6 +105,21 @@ function getCalculatdeData() {
       document.getElementById("newDeaths").innerHTML =
         "+ " + formatNumber(umrti) + " za " + date;
     });
+  fetch(
+    `https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/hospitalizace.json`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      var date = formatDate(data.data.slice(-1)[0].datum);
+
+      var hospitalizovani =
+        data.data.slice(-1)[0].pocet_hosp - data.data.slice(-2)[0].pocet_hosp;
+
+      document.getElementById("newHospital").innerHTML =
+        hospitalizovani < 0
+          ? formatNumber(hospitalizovani) + " za " + date
+          : "+ " + formatNumber(hospitalizovani) + " za " + date;
+    });
 }
 
 function getRNumber() {
@@ -109,5 +136,5 @@ function getRNumber() {
 }
 
 getBasicData();
-getCalculatdeData();
+calculateData();
 getRNumber();

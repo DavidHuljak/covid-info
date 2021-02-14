@@ -7,17 +7,12 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
-body.dark-theme {
-  color: white;
-  background: #282c34;
-  animation-duration: 15s;
-}
-
 .title {
   font-size: 20pt;
   margin: 10px;
   padding: 5px;
   text-align: center;
+  display: inline-block;
 }
 
 .data {
@@ -26,15 +21,14 @@ body.dark-theme {
   font-size: 15pt;
   background-color: darkred;
   color: white;
-  border-radius: 25px;
   margin: 10px;
   padding: 5px;
   font-weight: bold;
 }
 
 .dataWrapper {
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  width: 50%;
 }
 
 h1 {
@@ -86,7 +80,6 @@ label {
 
 select {
   font-size: 15px;
-  border-radius: 25px;
   padding: 5px;
 }
 
@@ -121,6 +114,10 @@ select {
 @media (max-width: 1230px) {
   .data {
     width: 200px;
+  }
+
+  .title {
+    display: block;
   }
 }
 
