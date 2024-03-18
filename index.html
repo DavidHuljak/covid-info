@@ -1,96 +1,18 @@
 <!DOCTYPE html>
-<html lang="cz">
+<html lang="cs">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
-    <link rel="stylesheet" href="./style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts-en.min.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script>
-    <title>CovidInfo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Covid-19 - ČR</title>
   </head>
   <body>
-    <h1>COVID-19 Česká republika</h1>
-    <h1>Nefunguje kvůli zrušení API</h3>
-    <!-- <div id="rNumber"></div>
-    <div class="dataWrapper">
-      <div class="title">
-        PCR testy:
-        <div class="data" id="PCRTests"></div>
-        <div class="data" id="newPCRTests"></div>
-      </div>
-      <div class="title">
-        Antigenní testy:
-        <div class="data" id="ATests"></div>
-        <div class="data" id="newATests"></div>
-      </div>
-      <div class="title">
-        Potvrzené případy:
-        <div class="data" id="cases"></div>
-        <div class="data" id="newCases"></div>
-      </div>
-      <div class="title">
-        Vykázaná očkování:
-        <div class="data" id="vaccination"></div>
-        <div class="data" id="newVaccination"></div>
-      </div>
-      <div class="title">
-        Vyléčení:
-        <div class="data" id="cures"></div>
-        <div class="data" id="newCures"></div>
-      </div>
-      <div class="title">
-        Úmrtí:
-        <div class="data" id="deaths"></div>
-        <div class="data" id="newDeaths"></div>
-      </div>
-      <div class="title">
-        Hospitalizovaní:
-        <div class="data" id="hospital"></div>
-        <div class="data" id="newHospital"></div>
-      </div>
-    </div>
-    <label for="select">Období: </label>
-    <div class="select">
-      <select name="select" id="select">
-        <option value="week">Týden</option>
-        <option value="month">Měsíc</option>
-        <option value="all">Celé období</option>
-      </select>
-    </div>
-    <div class="charts" id="testsChart"></div>
-    <div class="charts" id="ATestsChart"></div>
-    <div class="charts" id="casesChart"></div>
-    <div class="charts" id="curesChart"></div>
-    <div class="charts" id="deathsChart"></div>
-    <div class="charts" id="rChart"></div>
-
-    <script src="./basic-data.js"></script>
-    <script src="./charts.js"></script> -->
-
-    <footer>
-      <!-- Zdroj dat:
-      <a href="https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19"
-        >Ministerstvo Zdravotnictví ČR</a
-      >
-      <div>Data aktualizována: <span id="update"></span></div> -->
-
-      <span
-        >&copy Dávid Huljak
-        <script>
-          document.write(new Date().getFullYear());
-        </script></span
-      >
-      <div class="downLinks">
-        <a href="https://github.com/DavidHuljak/CovidInfo" target="_blank"
-          >GitHub</a
-        >
-        <a href="https://david.huljak.sk" target="_blank">DávidHuljak</a>
-      </div>
-    </footer>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
