@@ -27,17 +27,17 @@ function App() {
   const [basicData, setBasicData] = useState({} as BasicData);
 
   useEffect(() => {
-    axios.get("https://covid-info-backend.vercel.app/").then((response) => {
+    axios.get("https://api.huljak.cz/covid/stats").then((response) => {
       setBasicData(response.data[0]);
       console.log(response.data[0]);
     });
   }, []);
 
-  function generateCard(
+  const generateCard = (
     title: string,
     data: number,
     dataYesterday: number | null
-  ) {
+  ) => {
     return (
       <div className="card">
         {title}:<div className="data">{formatNumber(data)}</div>
@@ -48,7 +48,7 @@ function App() {
         )}
       </div>
     );
-  }
+  };
 
   return (
     <>
